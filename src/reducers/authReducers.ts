@@ -3,7 +3,7 @@ interface Action {
   payload: any;
 }
 
-interface Test {
+interface Exam {
   testNo: number;
   correct: number;
   score: number;
@@ -15,13 +15,18 @@ export interface AuthState {
     _id?: string;
     name?: string;
     email?: string;
-    tests?: Test[];
+    tests?: Exam[];
   };
 }
 
 const initialState = {
   accessToken: "",
-  user: null,
+  user: {
+    _id: "",
+    name: "",
+    email: "",
+    tests: [],
+  },
 };
 
 export default (state = initialState, { type, payload }: Action) => {
@@ -29,6 +34,14 @@ export default (state = initialState, { type, payload }: Action) => {
     case "LOGIN_SUCCESS":
     case "REGISTER_SUCCESS":
       return payload;
+    case "UPDATE_USER_TESTS":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          tests: payload,
+        },
+      };
     case "LOGOUT":
       localStorage.clear();
       return initialState;

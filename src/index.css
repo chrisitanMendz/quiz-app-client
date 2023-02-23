@@ -1,3 +1,7 @@
+body {
+  color: #191d63;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

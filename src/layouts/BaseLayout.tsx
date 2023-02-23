@@ -11,7 +11,7 @@ const BaseLayout = () => {
       const JSONToken = JSON.parse(token);
       dispatch({ type: "LOGIN_SUCCESS", payload: JSONToken });
     }
-  }, [dispatch]);
+  }, []);
 
   return <Outlet />;
 };

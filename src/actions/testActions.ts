@@ -11,8 +11,8 @@ interface MyAnswer {
   myAnswers: Answer[];
 }
 
-export const getTest = async (id: number, dispatch: Dispatch<AnyAction>) => {
-  const res: any = await axiosInstance.get(`test/${id}`);
+export const startTest = async (id: number, dispatch: Dispatch<AnyAction>) => {
+  const res: any = await axiosInstance.get(`test/start/${id}`);
 
   if (res?.error) {
     console.log(res);
@@ -29,4 +29,14 @@ export const submitAnswer = async (data: MyAnswer, email: string | undefined, di
     return;
   }
   dispatch({ type: "EXAM_INFO", payload: res });
+};
+
+export const getAllTest = async (dispatch: Dispatch<AnyAction>) => {
+  const res: any = await axiosInstance.get("test/all");
+
+  if (res.error) {
+    console.log(res);
+    return;
+  }
+  dispatch({ type: "GET_ALL_TEST", payload: res });
 };

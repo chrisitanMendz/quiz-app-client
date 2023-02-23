@@ -18,7 +18,7 @@ const StartTest = () => {
 
   const totalScore = currentTest?.questions?.reduce((p, c) => (p += c.score), 0);
   const totalQuestion = currentTest?.questions?.length;
-  const current = currentTest?.questions?.find((item) => item.id === String(curQuestion));
+  const current = currentTest?.questions?.find((item) => item.qId === Number(curQuestion));
 
   useEffect(() => {
     if (totalQuestion === myAnswer.myAnswers.length) {
@@ -92,15 +92,15 @@ const StartTest = () => {
                 <div
                   key={item}
                   className={`
-                    flex items-center bg-white px-4 py-3 rounded-lg mb-3 cursor-pointer duration-300
-                    ${currentAnswer === item && "bg-[#45c486]"}
+                    flex items-center px-4 py-3 rounded-lg mb-3 cursor-pointer duration-300
+                    ${currentAnswer === item ? "bg-[#45c486]" : "bg-white"}
                   `}
                   onClick={() => setCurrentAnswer(item)}
                 >
                   <div
                     className={`
-                      w-9 h-9 rounded-full bg-prim-color font-semibold grid place-items-center mr-4 duration-300
-                      ${currentAnswer === item && "bg-white"}
+                      w-9 h-9 rounded-full font-semibold grid place-items-center mr-4 duration-300
+                      ${currentAnswer === item ? "bg-white" : "bg-prim-color"}
                     `}
                   >
                     {currentAnswer === item ? (

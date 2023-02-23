@@ -6,7 +6,7 @@ interface Action {
 interface question {
   answer: string;
   choices: string[];
-  id: string;
+  qId: number;
   question: string;
   score: number;
   _id: string;

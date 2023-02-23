@@ -2,12 +2,23 @@ import { FormikHelpers, FormikValues } from "formik";
 import axiosInstance from "../utils/Axios";
 import { Dispatch, AnyAction } from "redux";
 
-interface UserAccount {
-  accessToken?: string;
+interface test {
+  testNo: number;
+  correct: number;
+  score: number;
+}
+
+interface User {
   name?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;
+  tests?: test[];
+}
+
+interface UserAccount {
+  accessToken?: string;
+  user: User;
 }
 
 interface ErrorMessage {
@@ -57,5 +68,14 @@ export const register = async (
     actions.resetForm();
   } catch (error: any) {
     actions.setErrors({ loginError: error.message });
+  }
+};
+
+export const getUpdatedTests = async (email: string, dispatch: Dispatch<AnyAction>) => {
+  try {
+    const res: test[] = await axiosInstance.post("auth/gettests", { email });
+    dispatch({ type: "UPDATE_USER_TESTS", payload: res });
+  } catch (error) {
+    console.log(error);
   }
 };
